@@ -13,6 +13,7 @@ RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
 RUN git config --global user.email = "cd-user@my-app.com"
 RUN git config --global user.name "cd-user"
 ARG FRONT_REPOSITORY_URL
+RUN cd ~
 RUN git clone $FRONT_REPOSITORY_URL ./
 RUN npm install
 RUN npm run build
