@@ -22,7 +22,7 @@ jobs:
           heroku container:login
 
       - name: Build docker image
-        run: docker build -t ${{ secrets.HEROKU_APP_NAME }}:${{ github.run_id }} .
+        run: docker build --build-arg SSH_PRIVATE_KEY=${{secrets.SSH_PRIVATE_KEY}}  --build-arg ${{secrets.FRONT_REPOSITORY_URL}} -t ${{ secrets.HEROKU_APP_NAME }}:${{ github.run_id }} .
 
       - name: Deploy docker image
         run: |
