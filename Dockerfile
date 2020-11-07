@@ -5,7 +5,7 @@ WORKDIR /usr/app
 # Build frontend
 FROM base AS build-frontend
 ARG SSH_PRIVATE_KEY
-RUN echo $SSH_PRIVATE_KEY
+RUN echo "ssh: " $SSH_PRIVATE_KEY
 RUN mkdir -p ~/.ssh/
 RUN echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa
 RUN chmod 600 ~/.ssh/id_rsa
@@ -14,7 +14,7 @@ RUN ssh-keyscan github.com >> ~/.ssh/known_hosts
 RUN git config --global user.email = "cd-user@my-app.com"
 RUN git config --global user.name "cd-user"
 ARG FRONT_REPOSITORY_URL
-RUN echo $FRONT_REPOSITORY_URL
+RUN echo "repository: " $FRONT_REPOSITORY_URL
 RUN git clone $FRONT_REPOSITORY_URL $(pwd)
 RUN npm install
 RUN npm run build
