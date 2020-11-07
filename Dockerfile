@@ -5,6 +5,7 @@ WORKDIR /usr/app
 # Build frontend
 FROM base AS build-frontend
 ARG SSH_PRIVATE_KEY
+RUN echo $SSH_PRIVATE_KEY
 RUN mkdir -p ~/.ssh/
 RUN echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa
 RUN chmod 600 ~/.ssh/id_rsa
